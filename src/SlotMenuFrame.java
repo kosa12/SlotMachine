@@ -54,11 +54,11 @@ public class SlotMenuFrame extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     getContentPane().setBackground(new Color(113, 28, 155));
 
-    ImageIcon img = new ImageIcon("XD.gif");
+    ImageIcon img = new ImageIcon("gifs/XD.gif");
     JLabel globeGif = new JLabel("", img,  JLabel.CENTER);
     globeGif.setBounds(30,270,400,400);
 
-    ImageIcon img2 = new ImageIcon("XD2.gif");
+    ImageIcon img2 = new ImageIcon("gifs/XD2.gif");
     JLabel globeGif2 = new JLabel("", img2,  JLabel.CENTER);
     globeGif2.setBounds(750,270,400,400);
 

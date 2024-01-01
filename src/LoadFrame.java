@@ -147,7 +147,7 @@ public class LoadFrame extends JFrame {
 
   private List<String[]> readSaveData() {
     List<String[]> saveData = new ArrayList<>();
-    try (BufferedReader reader = new BufferedReader(new FileReader("player.txt"))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader("log/player.txt"))) {
       String line;
       while ((line = reader.readLine()) != null) {
         String[] parts = line.split(", ");

@@ -121,7 +121,7 @@ public class StartFrame extends JFrame {
         return;
       }
 
-      try (PrintWriter writer = new PrintWriter(new FileWriter("player.txt", true))) {
+      try (PrintWriter writer = new PrintWriter(new FileWriter("log/player.txt", true))) {
         writer.println(name + ", " + String.format("%.3f", balanceDouble));
       } catch (IOException ex) {
         JOptionPane.showMessageDialog(this, "Error saving player information.");

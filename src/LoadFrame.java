@@ -18,9 +18,9 @@ public class LoadFrame extends JFrame {
 
   {
     try {
-      buttonFont = Font.createFont(Font.TRUETYPE_FONT, new File("SAIBA-45.ttf")).deriveFont(60f);
-      textFont = Font.createFont(Font.TRUETYPE_FONT, new File("SAIBA-45.ttf")).deriveFont(50f);
-      textFontOutLine = Font.createFont(Font.TRUETYPE_FONT, new File("SAIBA-45-Outline.ttf")).deriveFont(49f);
+      buttonFont = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(60f);
+      textFont = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(50f);
+      textFontOutLine = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45-Outline.ttf")).deriveFont(49f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }

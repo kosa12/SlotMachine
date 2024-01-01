@@ -14,7 +14,7 @@ public class SlotMenuFrame extends JFrame {
 
   {
     try {
-      titleFont1 = Font.createFont(Font.TRUETYPE_FONT, new File("SAIBA-45-Outline.ttf")).deriveFont(138f);
+      titleFont1 = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45-Outline.ttf")).deriveFont(138f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -24,7 +24,7 @@ public class SlotMenuFrame extends JFrame {
 
   {
     try {
-      titleFont2 = Font.createFont(Font.TRUETYPE_FONT, new File("SAIBA-45.ttf")).deriveFont(140f);
+      titleFont2 = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(140f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -39,7 +39,7 @@ public class SlotMenuFrame extends JFrame {
 
   {
     try {
-      buttonFont = Font.createFont(Font.TRUETYPE_FONT, new File("SAIBA-45.ttf")).deriveFont(55f);
+      buttonFont = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(55f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }

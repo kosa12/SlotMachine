@@ -15,9 +15,9 @@ public class StartFrame extends JFrame {
 
   {
     try {
-      textFont = Font.createFont(Font.TRUETYPE_FONT, new File("SAIBA-45.ttf")).deriveFont(40f);
-      textFontOutLine = Font.createFont(Font.TRUETYPE_FONT, new File("SAIBA-45-Outline.ttf")).deriveFont(39f);
-      buttonFont = Font.createFont(Font.TRUETYPE_FONT, new File("SAIBA-45.ttf")).deriveFont(60f);
+      textFont = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(40f);
+      textFontOutLine = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45-Outline.ttf")).deriveFont(39f);
+      buttonFont = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(60f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }

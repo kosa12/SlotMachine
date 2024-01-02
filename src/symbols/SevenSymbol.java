@@ -6,7 +6,7 @@ public class SevenSymbol implements Symbol{
 
   @Override
   public String getSymbol() {
-    return "seven";
+    return "Seven";
   }
 
   private static final int WIDTH = 60;

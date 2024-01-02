@@ -6,7 +6,7 @@ public class AppleSymbol implements Symbol{
 
   @Override
   public String getSymbol() {
-    return "apple";
+    return "Apple";
   }
 
   private static final int WIDTH = 60;

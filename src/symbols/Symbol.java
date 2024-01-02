@@ -4,6 +4,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public interface Symbol {
+
   String getSymbol();
   ImageIcon getSymbolImage();
 

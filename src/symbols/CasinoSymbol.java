@@ -6,7 +6,7 @@ public class CasinoSymbol implements Symbol {
 
   @Override
   public String getSymbol() {
-    return "casino";
+    return "Casino";
   }
 
   private static final int WIDTH = 60;

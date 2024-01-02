@@ -1,17 +1,25 @@
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import symbols.Symbol;
 
 public class SlotGameFrame extends JFrame {
+
   private final SymbolPanel symbolPanel;
   private final JLabel balanceLabel;
   private final JLabel nameLabel;
   private final JTextField betField;
+  private final JButton shuffleButton;
+  private double currentBalance;
 
   public SlotGameFrame(double balance, String name) {
+    currentBalance = balance;
+
     setSize(1200, 700);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     getContentPane().setBackground(new Color(113, 28, 155));
@@ -25,7 +33,7 @@ public class SlotGameFrame extends JFrame {
     symbolPanel.setBorder(new LineBorder(Color.black, 5));
     con.add(symbolPanel);
 
-    balanceLabel = new JLabel("$" + balance);
+    balanceLabel = new JLabel("$" + currentBalance);
     balanceLabel.setForeground(Color.WHITE);
     balanceLabel.setBounds(1000, 600, 200, 30);
     con.add(balanceLabel);
@@ -37,11 +45,9 @@ public class SlotGameFrame extends JFrame {
 
     betField = new JTextField();
     betField.setBounds(50, 550, 200, 30);
-    betField.setBackground(new Color(211, 153, 240));
-    betField.setBorder(javax.swing.BorderFactory.createEmptyBorder());
     con.add(betField);
 
-    JButton shuffleButton = new JButton("Shuffle");
+    shuffleButton = new JButton("Shuffle");
     shuffleButton.setBounds(50, 600, 200, 30);
     shuffleButton.addActionListener(new ActionListener() {
       @Override
@@ -55,22 +61,60 @@ public class SlotGameFrame extends JFrame {
     setVisible(true);
   }
 
-  public void updateBalance(double newBalance) {
-    balanceLabel.setText("Balance: $" + newBalance);
-  }
-
   private void handleBet() {
     try {
       double betAmount = Double.parseDouble(betField.getText());
-      if (betAmount >= 0) {
-        //TODO :: game logic
+      if (betAmount >= 0 && betAmount <= currentBalance) {
+        symbolPanel.setShuffleCompleteCallback(() -> checkForWin(betAmount));
+
         symbolPanel.startShuffle();
       } else {
-        JOptionPane.showMessageDialog(this, "Invalid bet amount. Please enter a non-negative number.");
+        JOptionPane.showMessageDialog(this, "Invalid bet amount. Please enter a valid amount within your balance.");
       }
     } catch (NumberFormatException ex) {
       JOptionPane.showMessageDialog(this, "Invalid bet amount. Please enter a valid number.");
     }
+  }
+
+  private void checkForWin(double betAmount) {
+    Symbol[][] spinResult = symbolPanel.getShuffledSymbols();
+
+    if (SlotGameLogic.isWin(spinResult)) {
+      double payout = SlotGameLogic.calculatePayout(spinResult, betAmount);
+      currentBalance = SlotGameLogic.updateBalance(currentBalance, betAmount, payout);
+
+      showWinDialog(payout, betAmount);
+    } else {
+      currentBalance -= betAmount;
+    }
+
+    updateUI();
+  }
+
+  private void showWinDialog(double payout, double betamount) {
+    JDialog winDialog = new JDialog(this, "Win!!", Dialog.ModalityType.MODELESS);
+    winDialog.setLayout(new BoxLayout(winDialog.getContentPane(), BoxLayout.Y_AXIS));
+
+    JLabel winLabel;
+
+    if(payout >= 2 * betamount){
+      winLabel = new JLabel("Congratulations! BIG WIN!");
+    }
+    else{
+      winLabel = new JLabel("Congratulations! You won!");
+    }
+
+    winLabel.setAlignmentX(CENTER_ALIGNMENT);
+
+    winDialog.add(Box.createRigidArea(new Dimension(0, 20)));
+    winDialog.add(winLabel);
+
+    winDialog.setBounds(1100, 400, 200, 100);
+    winDialog.setVisible(true);
+  }
+
+  private void updateUI() {
+    balanceLabel.setText("Balance: $" + currentBalance);
   }
 
   public static void main(String[] args) {

@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 public class GunSymbol implements Symbol{
   @Override
   public String getSymbol() {
-    return "gun";
+    return "Gun";
   }
 
   private static final int WIDTH = 60;

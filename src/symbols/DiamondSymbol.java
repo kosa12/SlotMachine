@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 public class DiamondSymbol implements Symbol {
   @Override
   public String getSymbol() {
-    return "diamond";
+    return "Diamond";
   }
 
   private static final int WIDTH = 60;

@@ -6,7 +6,7 @@ public class BananaSymbol implements Symbol {
 
   @Override
   public String getSymbol() {
-    return "banana";
+    return "Banana";
   }
 
   private static final int WIDTH = 60;

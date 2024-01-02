@@ -6,7 +6,7 @@ public class CherrySymbol implements Symbol{
 
   @Override
   public String getSymbol() {
-    return "cherry";
+    return "Cherry";
   }
 
   private static final int WIDTH = 60;

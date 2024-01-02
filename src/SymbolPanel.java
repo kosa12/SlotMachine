@@ -1,29 +1,33 @@
-import java.util.Arrays;
-import java.util.Random;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import symbols.*;
 
 public class SymbolPanel extends JPanel {
   private final Symbol[][] symbols;
+  private Symbol[][] shuffledSymbols;
+  private final Timer shuffleTimer;
   private final int shuffleDuration = 600;
   private final int symbolSize = 100;
   private final int rows = 3;
   private final int columns = 3;
 
+  boolean isShuffling = false;
+
   public SymbolPanel() {
     symbols = new Symbol[rows][columns];
     initializeSymbols();
-
+    shuffledSymbols = symbols.clone(); // Initial shuffle
     setPreferredSize(new Dimension(symbolSize * columns + (columns - 1) * 10, symbolSize * rows + (rows - 1) * 10));
     setBackground(Color.WHITE);
 
-    Timer shuffleTimer = new Timer(shuffleDuration, new ActionListener() {
+    shuffleTimer = new Timer(shuffleDuration, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         shuffleSymbols();
@@ -52,15 +56,15 @@ public class SymbolPanel extends JPanel {
         symbols[i][j] = symbolTypes.get(randomIndex);
       }
     }
-
   }
 
   private void shuffleSymbols() {
     initializeSymbols();
-    List<Symbol> flatSymbols = new ArrayList<>();
+    shuffledSymbols = symbols.clone();
 
+    List<Symbol> flatSymbols = new ArrayList<>();
     for (int i = 0; i < rows; i++) {
-      flatSymbols.addAll(Arrays.asList(symbols[i]).subList(0, columns));
+      flatSymbols.addAll(Arrays.asList(shuffledSymbols[i]).subList(0, columns));
     }
 
     Collections.shuffle(flatSymbols);
@@ -68,35 +72,58 @@ public class SymbolPanel extends JPanel {
     int count = 0;
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < columns; j++) {
-        symbols[i][j] = flatSymbols.get(count);
+        shuffledSymbols[i][j] = flatSymbols.get(count);
         count++;
       }
     }
   }
 
   public void startShuffle() {
-    Thread shuffleThread = new Thread(new Runnable() {
-      @Override
-      public void run() {
-        int steps = 15;
+    if (!isShuffling) {
+      isShuffling = true;
 
-        for (int i = 0; i < steps; i++) {
-          try {
-            Thread.sleep((shuffleDuration) / steps);
-          } catch (InterruptedException ex) {
-            ex.printStackTrace();
+      Thread shuffleThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+          int steps = 15;
+
+          for (int i = 0; i < steps; i++) {
+            try {
+              Thread.sleep((shuffleDuration) / steps);
+            } catch (InterruptedException ex) {
+              ex.printStackTrace();
+            }
+
+            shuffleSymbols();
+            repaint();
           }
 
+          // Final shuffle after loop
           shuffleSymbols();
           repaint();
+
+          isShuffling = false; // Reset the flag after shuffling is complete
+
+          // Invoke the callback
+          if (shuffleCompleteCallback != null) {
+            shuffleCompleteCallback.run();
+          }
         }
+      });
 
-        shuffleSymbols();
-        repaint();
-      }
-    });
+      shuffleThread.start();
+    }
+  }
 
-    shuffleThread.start();
+  // Add this interface at the end of SymbolPanel.java
+  private Runnable shuffleCompleteCallback;
+
+  public void setShuffleCompleteCallback(Runnable callback) {
+    this.shuffleCompleteCallback = callback;
+  }
+
+  public Symbol[][] getShuffledSymbols() {
+    return shuffledSymbols;
   }
 
   @Override

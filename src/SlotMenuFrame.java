@@ -123,6 +123,11 @@ public class SlotMenuFrame extends JFrame {
     optionButton.setForeground(new Color(211, 189, 222));
     optionButton.setFont(buttonFont);
 
+    optionButton.addActionListener(e -> {
+      SwingUtilities.invokeLater(OptionFrame::new);
+      dispose();
+    });
+
     exitButton = new JButton("EXIT");
     exitButton.setFocusable(false);
     exitButton.setBorderPainted(false);
@@ -136,7 +141,6 @@ public class SlotMenuFrame extends JFrame {
       dispose();
       System.exit(0);
     });
-
 
     buttonPanel.setLayout(new GridLayout(4, 1, 0, 10));
     buttonPanel.add(startNewGameButton);

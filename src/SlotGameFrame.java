@@ -196,8 +196,8 @@ public class SlotGameFrame extends JFrame {
     } else {
       winLabel = new JLabel("You won!");
     }
-    winLabel.setFont(font4);
     winLabel.setAlignmentX(CENTER_ALIGNMENT);
+    winLabel.setForeground(Color.BLACK);
 
     JFrame winFrame = new JFrame();
     winFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -207,7 +207,7 @@ public class SlotGameFrame extends JFrame {
 
     winFrame.add(winLabel);
     winFrame.setSize(400, 100);
-    winFrame.setLocation(550, 400);
+    winFrame.setLocation(570, 400);
     winFrame.setVisible(true);
 
     final int[] fontSize = {0};
@@ -216,6 +216,7 @@ public class SlotGameFrame extends JFrame {
       public void actionPerformed(ActionEvent e) {
         fontSize[0] += 5;
         winLabel.setFont(new Font("Arial Black", Font.BOLD, fontSize[0]));
+
         if (fontSize[0] >= 70) {
           ((Timer) e.getSource()).stop();
           Timer closeTimer = new Timer(1000, new ActionListener() {
@@ -230,6 +231,7 @@ public class SlotGameFrame extends JFrame {
       }
     });
     timer.start();
+
   }
 
 

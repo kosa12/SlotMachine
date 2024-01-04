@@ -14,7 +14,7 @@ public class SevenSymbol implements Symbol{
 
   @Override
   public ImageIcon getSymbolImage() {
-    ImageIcon originalIcon = new ImageIcon("img/seven.png");
+    ImageIcon originalIcon = new ImageIcon("src/img/seven.png");
     return resizeIcon(originalIcon, WIDTH, HEIGHT);
   }
 

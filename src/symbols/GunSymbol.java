@@ -13,7 +13,7 @@ public class GunSymbol implements Symbol{
 
   @Override
   public ImageIcon getSymbolImage() {
-    ImageIcon originalIcon = new ImageIcon("img/gun.png");
+    ImageIcon originalIcon = new ImageIcon("src/img/gun.png");
     return resizeIcon(originalIcon, WIDTH, HEIGHT);
   }
 }

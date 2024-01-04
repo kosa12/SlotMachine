@@ -14,7 +14,7 @@ public class CasinoSymbol implements Symbol {
 
   @Override
   public ImageIcon getSymbolImage() {
-    ImageIcon originalIcon = new ImageIcon("img/casino.png");
+    ImageIcon originalIcon = new ImageIcon("src/img/casino.png");
     return resizeIcon(originalIcon, WIDTH, HEIGHT);
   }
 

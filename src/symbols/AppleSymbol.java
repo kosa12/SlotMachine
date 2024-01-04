@@ -14,7 +14,7 @@ public class AppleSymbol implements Symbol{
 
   @Override
   public ImageIcon getSymbolImage() {
-    ImageIcon originalIcon = new ImageIcon("img/apple.png");
+    ImageIcon originalIcon = new ImageIcon("src/img/apple.png");
     return resizeIcon(originalIcon, WIDTH, HEIGHT);
   }
 

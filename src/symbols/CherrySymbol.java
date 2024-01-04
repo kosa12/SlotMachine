@@ -14,7 +14,7 @@ public class CherrySymbol implements Symbol{
 
   @Override
   public ImageIcon getSymbolImage() {
-    ImageIcon originalIcon = new ImageIcon("img/cherry.png");
+    ImageIcon originalIcon = new ImageIcon("src/img/cherry.png");
     return resizeIcon(originalIcon, WIDTH, HEIGHT);
   }
 

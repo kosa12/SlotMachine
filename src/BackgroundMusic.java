@@ -1,3 +1,4 @@
+import java.util.Objects;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -6,11 +7,11 @@ public class BackgroundMusic {
   private static BackgroundMusic instance;
   private Clip clip;
   private int referenceCount;
-  private float volume; // New variable to store the volume level
+  private float volume;
 
   private BackgroundMusic() {
     referenceCount = 0;
-    volume = 1.0f; // Set default volume to maximum (1.0)
+    volume = 1.0f;
   }
 
   public static BackgroundMusic getInstance() {
@@ -23,7 +24,7 @@ public class BackgroundMusic {
   public void addReference() {
     referenceCount++;
     if (referenceCount == 1) {
-      play("music/background.wav");
+      play("/music/background.wav");
     }
   }
 
@@ -41,27 +42,34 @@ public class BackgroundMusic {
   public void setVolume(float volume) {
     this.volume = volume;
     if (clip != null) {
-      FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-      float gain = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
-      gainControl.setValue(gain);
+      adjustVolume();
     }
   }
 
   private void play(String musicFilePath) {
     try {
-      File soundFile = new File(musicFilePath);
-      AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+      AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource(musicFilePath)));
       clip = AudioSystem.getClip();
       clip.open(audioInputStream);
 
-      // Set the volume
-      FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-      float gain = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
-      gainControl.setValue(gain);
+      adjustVolume();
 
       clip.loop(Clip.LOOP_CONTINUOUSLY);
     } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
       e.printStackTrace();
+    }
+  }
+
+  private void adjustVolume() {
+    if (clip != null) {
+      try {
+        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        float range = gainControl.getMaximum() - gainControl.getMinimum();
+        float gain = (range * volume) + gainControl.getMinimum();
+        gainControl.setValue(gain);
+      } catch (IllegalArgumentException e) {
+        e.printStackTrace();
+      }
     }
   }
 

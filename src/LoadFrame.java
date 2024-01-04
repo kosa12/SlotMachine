@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.InputStream;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -17,10 +18,36 @@ public class LoadFrame extends JFrame {
   Font textFont;
 
   {
-    try {
-      buttonFont = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(60f);
-      textFont = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(50f);
-      textFontOutLine = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45-Outline.ttf")).deriveFont(49f);
+    String fName = "fonts/SAIBA-45.ttf";
+    try (InputStream is = SlotGameFrame.class.getResourceAsStream(fName)) {
+      if (is == null) {
+        throw new IOException("Font file not found: " + fName);
+      }
+      buttonFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(60f);
+    } catch (FontFormatException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  {
+    String fName = "fonts/SAIBA-45-Outline.ttf";
+    try (InputStream is = SlotGameFrame.class.getResourceAsStream(fName)) {
+      if (is == null) {
+        throw new IOException("Font file not found: " + fName);
+      }
+      textFontOutLine = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(49f);
+    } catch (FontFormatException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  {
+    String fName = "fonts/SAIBA-45.ttf";
+    try (InputStream is = SlotGameFrame.class.getResourceAsStream(fName)) {
+      if (is == null) {
+        throw new IOException("Font file not found: " + fName);
+      }
+      textFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(50f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }

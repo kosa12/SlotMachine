@@ -1,13 +1,11 @@
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dialog.ModalityType;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import symbols.Symbol;
@@ -23,8 +21,12 @@ public class SlotGameFrame extends JFrame {
 
   Font font1;
   {
-    try {
-      font1 = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45-Outline.ttf")).deriveFont(60f);
+    String fName = "fonts/SAIBA-45.ttf";
+    try (InputStream is = SlotGameFrame.class.getResourceAsStream(fName)) {
+      if (is == null) {
+        throw new IOException("Font file not found: " + fName);
+      }
+      font1 = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(60f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -32,8 +34,12 @@ public class SlotGameFrame extends JFrame {
 
   Font font1b;
   {
-    try {
-      font1b = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(59f);
+    String fName = "fonts/SAIBA-45-Outline.ttf";
+    try (InputStream is = SlotGameFrame.class.getResourceAsStream(fName)) {
+      if (is == null) {
+        throw new IOException("Font file not found: " + fName);
+      }
+      font1b = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(59f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -41,8 +47,12 @@ public class SlotGameFrame extends JFrame {
 
   Font font2;
   {
-    try {
-      font2 = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(70f);
+    String fName = "fonts/SAIBA-45.ttf";
+    try (InputStream is = SlotGameFrame.class.getResourceAsStream(fName)) {
+      if (is == null) {
+        throw new IOException("Font file not found: " + fName);
+      }
+      font2 = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(70f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -50,8 +60,12 @@ public class SlotGameFrame extends JFrame {
 
   Font font3;
   {
-    try {
-      font3 = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45-Outline.ttf")).deriveFont(30f);
+    String fName = "fonts/SAIBA-45.ttf";
+    try (InputStream is = SlotGameFrame.class.getResourceAsStream(fName)) {
+      if (is == null) {
+        throw new IOException("Font file not found: " + fName);
+      }
+      font3 = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(30f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -59,8 +73,12 @@ public class SlotGameFrame extends JFrame {
 
   Font font3b;
   {
-    try {
-      font3b = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(30f);
+    String fName = "fonts/SAIBA-45.ttf";
+    try (InputStream is = SlotGameFrame.class.getResourceAsStream(fName)) {
+      if (is == null) {
+        throw new IOException("Font file not found: " + fName);
+      }
+      font3b = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(30f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -68,8 +86,12 @@ public class SlotGameFrame extends JFrame {
 
   Font font4;
   {
-    try {
-      font4 = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(40f);
+    String fName = "fonts/SAIBA-45.ttf";
+    try (InputStream is = SlotGameFrame.class.getResourceAsStream(fName)) {
+      if (is == null) {
+        throw new IOException("Font file not found: " + fName);
+      }
+      font4 = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(40f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -187,8 +209,8 @@ public class SlotGameFrame extends JFrame {
   }
 
   private void showWinDialog(double wonAmount) {
-    SoundEffect.play("music/win_sound.wav");
-
+    InputStream inputStream = getClass().getResourceAsStream("/music/win_sound.wav");
+    SoundEffect.play(inputStream);
     JLabel winLabel;
 
     if (wonAmount > 2 * Double.parseDouble(betField.getText())) {

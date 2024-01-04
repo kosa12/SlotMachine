@@ -13,7 +13,7 @@ public class DiamondSymbol implements Symbol {
 
   @Override
   public ImageIcon getSymbolImage() {
-    ImageIcon originalIcon = new ImageIcon("img/diamond.png");
+    ImageIcon originalIcon = new ImageIcon("src/img/diamond.png");
     return resizeIcon(originalIcon, WIDTH, HEIGHT);
   }
 }

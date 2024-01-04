@@ -1,3 +1,4 @@
+import java.io.InputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -80,7 +81,8 @@ public class SymbolPanel extends JPanel {
 
   public void startShuffle() {
     if (!isShuffling) {
-      SoundEffect.play("music/play_sound.wav");
+      InputStream inputStream = getClass().getResourceAsStream("/music/play_sound.wav");
+      SoundEffect.play(inputStream);
       isShuffling = true;
 
       Thread shuffleThread = new Thread(new Runnable() {

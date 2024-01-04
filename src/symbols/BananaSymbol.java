@@ -14,7 +14,7 @@ public class BananaSymbol implements Symbol {
 
   @Override
   public ImageIcon getSymbolImage() {
-    ImageIcon originalIcon = new ImageIcon("img/banana.png");
+    ImageIcon originalIcon = new ImageIcon("src/img/banana.png");
     return resizeIcon(originalIcon, WIDTH, HEIGHT);
   }
 

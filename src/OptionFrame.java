@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,8 +11,12 @@ public class OptionFrame extends JFrame {
 
   Font buttonFont;
   {
-    try {
-      buttonFont = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(55f);
+    String fName = "fonts/SAIBA-45.ttf";
+    try (InputStream is = SlotGameFrame.class.getResourceAsStream(fName)) {
+      if (is == null) {
+        throw new IOException("Font file not found: " + fName);
+      }
+      buttonFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(55f);
     } catch (FontFormatException | IOException e) {
       throw new RuntimeException(e);
     }

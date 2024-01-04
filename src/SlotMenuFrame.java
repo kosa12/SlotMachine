@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.io.InputStream;
+import java.util.Objects;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -67,12 +68,12 @@ public class SlotMenuFrame extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     getContentPane().setBackground(new Color(113, 28, 155));
 
-    ImageIcon img = new ImageIcon("src/gifs/XD.gif");
-    JLabel globeGif = new JLabel("", img,  JLabel.CENTER);
+    JLabel globeGif = new JLabel("", new ImageIcon(
+        Objects.requireNonNull(getClass().getResource("src/gifs/XD.gif"))),  JLabel.CENTER);
     globeGif.setBounds(30,270,400,400);
 
-    ImageIcon img2 = new ImageIcon("src/gifs/XD2.gif");
-    JLabel globeGif2 = new JLabel("", img2,  JLabel.CENTER);
+    JLabel globeGif2 = new JLabel("", new ImageIcon(
+        Objects.requireNonNull(getClass().getResource("src/gifs/XD2.gif"))),  JLabel.CENTER);
     globeGif2.setBounds(750,270,400,400);
 
     con = getContentPane();

@@ -24,6 +24,7 @@ public class StartFrame extends JFrame {
   }
 
   public StartFrame() {
+    BackgroundMusic.getInstance().addReference();
     setSize(1200, 700);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     getContentPane().setBackground(new Color(113, 28, 155));
@@ -137,4 +138,5 @@ public class StartFrame extends JFrame {
 
 
   }
+
 }

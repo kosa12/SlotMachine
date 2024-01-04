@@ -80,6 +80,7 @@ public class SymbolPanel extends JPanel {
 
   public void startShuffle() {
     if (!isShuffling) {
+      SoundEffect.play("music/play_sound.wav");
       isShuffling = true;
 
       Thread shuffleThread = new Thread(new Runnable() {
@@ -98,13 +99,11 @@ public class SymbolPanel extends JPanel {
             repaint();
           }
 
-          // Final shuffle after loop
           shuffleSymbols();
           repaint();
 
-          isShuffling = false; // Reset the flag after shuffling is complete
+          isShuffling = false;
 
-          // Invoke the callback
           if (shuffleCompleteCallback != null) {
             shuffleCompleteCallback.run();
           }
@@ -115,7 +114,6 @@ public class SymbolPanel extends JPanel {
     }
   }
 
-  // Add this interface at the end of SymbolPanel.java
   private Runnable shuffleCompleteCallback;
 
   public void setShuffleCompleteCallback(Runnable callback) {

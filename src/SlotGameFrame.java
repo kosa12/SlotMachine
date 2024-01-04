@@ -1,24 +1,83 @@
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dialog;
+import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import symbols.Symbol;
 
 public class SlotGameFrame extends JFrame {
-
   private final SymbolPanel symbolPanel;
   private final JLabel balanceLabel;
   private final JLabel nameLabel;
+  private final JLabel betLabel;
   private final JTextField betField;
-  private final JButton shuffleButton;
+  private final JLabel wonLabel;
   private double currentBalance;
+
+  Font font1;
+  {
+    try {
+      font1 = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45-Outline.ttf")).deriveFont(60f);
+    } catch (FontFormatException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  Font font1b;
+  {
+    try {
+      font1b = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(59f);
+    } catch (FontFormatException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  Font font2;
+  {
+    try {
+      font2 = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(70f);
+    } catch (FontFormatException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  Font font3;
+  {
+    try {
+      font3 = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45-Outline.ttf")).deriveFont(30f);
+    } catch (FontFormatException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  Font font3b;
+  {
+    try {
+      font3b = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(30f);
+    } catch (FontFormatException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  Font font4;
+  {
+    try {
+      font4 = Font.createFont(Font.TRUETYPE_FONT, new File("font/SAIBA-45.ttf")).deriveFont(40f);
+    } catch (FontFormatException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
   public SlotGameFrame(double balance, String name) {
     currentBalance = balance;
+    BackgroundMusic.getInstance().addReference();
 
     setSize(1200, 700);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,29 +92,65 @@ public class SlotGameFrame extends JFrame {
     symbolPanel.setBorder(new LineBorder(Color.black, 5));
     con.add(symbolPanel);
 
-    balanceLabel = new JLabel("$" + currentBalance);
+    balanceLabel = new JLabel(String.format("$%.1f", currentBalance));
+    balanceLabel.setFont(font1);
     balanceLabel.setForeground(Color.WHITE);
-    balanceLabel.setBounds(1000, 600, 200, 30);
+    balanceLabel.setBounds(890, 580, 350, 60);
     con.add(balanceLabel);
 
     nameLabel = new JLabel(name);
-    nameLabel.setForeground(Color.WHITE);
-    nameLabel.setBounds(50, 50, 200, 30);
+    nameLabel.setForeground(new Color(234, 0, 217));
+    nameLabel.setBounds(20, 20, 400, 70);
+    nameLabel.setFont(font2);
     con.add(nameLabel);
 
+    betLabel = new JLabel("Place your bet:");
+    betLabel.setForeground(Color.WHITE);
+    betLabel.setFont(font3);
+    betLabel.setBounds(20, 580, 300, 50);
+    con.add(betLabel);
+
     betField = new JTextField();
-    betField.setBounds(50, 550, 200, 30);
+    betField.setBounds(50, 625, 200, 30);
+    betField.setBackground(new Color(211, 153, 240));
+    betField.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+    betField.setFont(font3b);
+    betField.setForeground(Color.BLACK);
     con.add(betField);
 
-    shuffleButton = new JButton("Shuffle");
-    shuffleButton.setBounds(50, 600, 200, 30);
-    shuffleButton.addActionListener(new ActionListener() {
+    JButton shuffleButton = new JButton("Shuffle");
+    shuffleButton.setFocusable(false);
+    shuffleButton.setBorderPainted(false);
+    shuffleButton.setOpaque(false);
+    shuffleButton.setContentAreaFilled(false);
+    shuffleButton.setBackground(new Color(113, 28, 155));
+    shuffleButton.setForeground(new Color(234, 0, 217));
+    shuffleButton.setFont(font1);
+    shuffleButton.setBounds(400, 580, 400, 60);
+
+    JButton shuffleButton2 = new JButton("Shuffle");
+    shuffleButton2.setFocusable(false);
+    shuffleButton2.setBorderPainted(false);
+    shuffleButton2.setOpaque(false);
+    shuffleButton2.setContentAreaFilled(false);
+    shuffleButton2.setBackground(new Color(113, 28, 155));
+    shuffleButton2.setForeground(new Color(211, 189, 222));
+    shuffleButton2.setFont(font1b);
+    shuffleButton2.setBounds(400, 580, 400, 60);
+    con.add(shuffleButton2);
+    shuffleButton2.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         handleBet();
       }
     });
     con.add(shuffleButton);
+
+    wonLabel = new JLabel("Won: $0.0");
+    wonLabel.setForeground(new Color(234, 0, 217));
+    wonLabel.setFont(font4);
+    wonLabel.setBounds(890, 530, 300, 50);
+    con.add(wonLabel);
 
     setLocationRelativeTo(null);
     setVisible(true);
@@ -65,8 +160,8 @@ public class SlotGameFrame extends JFrame {
     try {
       double betAmount = Double.parseDouble(betField.getText());
       if (betAmount >= 0 && betAmount <= currentBalance) {
-        symbolPanel.setShuffleCompleteCallback(() -> checkForWin(betAmount));
 
+        symbolPanel.setShuffleCompleteCallback(() -> checkForWin(betAmount));
         symbolPanel.startShuffle();
       } else {
         JOptionPane.showMessageDialog(this, "Invalid bet amount. Please enter a valid amount within your balance.");
@@ -78,46 +173,77 @@ public class SlotGameFrame extends JFrame {
 
   private void checkForWin(double betAmount) {
     Symbol[][] spinResult = symbolPanel.getShuffledSymbols();
-
+    double wonAmount = 0;
     if (SlotGameLogic.isWin(spinResult)) {
-      double payout = SlotGameLogic.calculatePayout(spinResult, betAmount);
-      currentBalance = SlotGameLogic.updateBalance(currentBalance, betAmount, payout);
-
-      showWinDialog(payout, betAmount);
+      wonAmount = SlotGameLogic.calculatePayout(spinResult, betAmount);
+      currentBalance = SlotGameLogic.updateBalance(currentBalance, betAmount, wonAmount);
+      showWinDialog(wonAmount);
     } else {
       currentBalance -= betAmount;
     }
 
-    updateUI();
+
+    updateUI(wonAmount);
   }
 
-  private void showWinDialog(double payout, double betamount) {
-    JDialog winDialog = new JDialog(this, "Win!!", Dialog.ModalityType.MODELESS);
-    winDialog.setLayout(new BoxLayout(winDialog.getContentPane(), BoxLayout.Y_AXIS));
+  private void showWinDialog(double wonAmount) {
+    SoundEffect.play("music/win_sound.wav");
 
     JLabel winLabel;
 
-    if(payout >= 2 * betamount){
-      winLabel = new JLabel("Congratulations! BIG WIN!");
+    if (wonAmount > 2 * Double.parseDouble(betField.getText())) {
+      winLabel = new JLabel("BIG WIN!");
+    } else {
+      winLabel = new JLabel("You won!");
     }
-    else{
-      winLabel = new JLabel("Congratulations! You won!");
-    }
-
+    winLabel.setFont(font4);
     winLabel.setAlignmentX(CENTER_ALIGNMENT);
 
-    winDialog.add(Box.createRigidArea(new Dimension(0, 20)));
-    winDialog.add(winLabel);
+    JFrame winFrame = new JFrame();
+    winFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    winFrame.setLayout(new BoxLayout(winFrame.getContentPane(), BoxLayout.Y_AXIS));
+    winFrame.setUndecorated(true);
+    winFrame.setBackground(new Color(0, 0, 0, 0));
 
-    winDialog.setBounds(1100, 400, 200, 100);
-    winDialog.setVisible(true);
+    winFrame.add(winLabel);
+    winFrame.setSize(400, 100);
+    winFrame.setLocation(550, 400);
+    winFrame.setVisible(true);
+
+    final int[] fontSize = {0};
+    Timer timer = new Timer(50, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        fontSize[0] += 5;
+        winLabel.setFont(new Font("Arial Black", Font.BOLD, fontSize[0]));
+        if (fontSize[0] >= 70) {
+          ((Timer) e.getSource()).stop();
+          Timer closeTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              winFrame.dispose();
+            }
+          });
+          closeTimer.setRepeats(false);
+          closeTimer.start();
+        }
+      }
+    });
+    timer.start();
   }
 
-  private void updateUI() {
-    balanceLabel.setText("Balance: $" + currentBalance);
+
+  private void updateUI(double wonAmount) {
+    balanceLabel.setText("$" + currentBalance);
+    wonLabel.setText("Won: $" + wonAmount);
   }
 
   public static void main(String[] args) {
     SwingUtilities.invokeLater(() -> new SlotGameFrame(1000.0, "Matyas"));
+  }
+  @Override
+  public void dispose() {
+    super.dispose();
+    BackgroundMusic.getInstance().removeReference();
   }
 }

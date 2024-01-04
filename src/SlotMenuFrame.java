@@ -48,7 +48,7 @@ public class SlotMenuFrame extends JFrame {
   Container con;
 
   public SlotMenuFrame() {
-
+    BackgroundMusic.getInstance().addReference();
     setLayout(null);
     setSize(1200, 700);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,4 +156,5 @@ public class SlotMenuFrame extends JFrame {
   public static void main(String[] args) {
     new SlotMenuFrame();
   }
+
 }

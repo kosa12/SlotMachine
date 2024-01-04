@@ -27,6 +27,8 @@ public class LoadFrame extends JFrame {
   }
 
   public LoadFrame() {
+
+    BackgroundMusic.getInstance().addReference();
     setSize(1200, 700);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     getContentPane().setBackground(new Color(113, 28, 155));
@@ -166,4 +168,5 @@ public class LoadFrame extends JFrame {
   public static void main(String[] args) {
     new LoadFrame();
   }
+
 }

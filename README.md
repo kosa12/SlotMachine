@@ -1,4 +1,5 @@
 # Slot Machine Game 🎰
+![SWAG](http://ForTheBadge.com/images/badges/built-with-swag.svg)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
 ## Overview 📖
@@ -42,6 +43,7 @@ The Slot Machine Game is a Java-based application that simulates a virtual slot 
 ## Analytics
 ![GitHub repo size](https://img.shields.io/github/repo-size/kosa12/SlotMachine?style=plastic)
 ![GitHub last commit](https://img.shields.io/github/last-commit/kosa12/SlotMachine?color=red&style=plastic)
+![WHAT](https://img.shields.io/github/downloads/kosa12/SlotMachine/total.svg)
 
 ## Donate
 <span class="badge-buymeacoffee">

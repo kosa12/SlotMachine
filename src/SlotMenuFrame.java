@@ -1,12 +1,8 @@
+import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-import javax.swing.*;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.File;
-import java.io.IOException;
 
 public class SlotMenuFrame extends JFrame {
   JPanel titlePanel;

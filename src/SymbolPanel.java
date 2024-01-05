@@ -1,14 +1,13 @@
-import java.io.InputStream;
+import symbols.*;
+
+import javax.swing.Timer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.io.InputStream;
 import java.util.List;
-import java.util.Random;
-import symbols.*;
+import java.util.*;
 
 public class SymbolPanel extends JPanel {
   private final Symbol[][] symbols;

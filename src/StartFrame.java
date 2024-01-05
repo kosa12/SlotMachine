@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 
 public class StartFrame extends JFrame {
@@ -100,7 +101,7 @@ public class StartFrame extends JFrame {
 
     enterButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        LogInfo();
+        logInfo();
       }
     });
 
@@ -132,7 +133,7 @@ public class StartFrame extends JFrame {
     setVisible(true);
   }
 
-  private void LogInfo() {
+  private void logInfo() {
     String name = nameField.getText();
     String balance = balanceField.getText();
 
@@ -149,8 +150,20 @@ public class StartFrame extends JFrame {
         return;
       }
 
-      try (PrintWriter writer = new PrintWriter(new FileWriter("log/player.txt", true))) {
-        writer.println(name + ", " + String.format("%.3f", balanceDouble));
+      try (InputStream in = getClass().getResourceAsStream("src/log/player.txt")) {
+          assert in != null;
+          try (BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+               PrintWriter writer = new PrintWriter(new FileWriter("src/log/player.txt", true))) {
+
+            StringBuilder content = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+              content.append(line).append("\n");
+            }
+
+            content.append(name).append(", ").append(String.format("%.3f", balanceDouble)).append("\n");
+            writer.print(content);
+          }
       } catch (IOException ex) {
         JOptionPane.showMessageDialog(this, "Error saving player information.");
       }
@@ -162,8 +175,11 @@ public class StartFrame extends JFrame {
     } catch (NumberFormatException ex) {
       JOptionPane.showMessageDialog(this, "Please enter a valid numeric value for the balance.");
     }
+  }
 
 
+  public static void main(String[] args) {
+    new StartFrame();
   }
 
 }

@@ -1,7 +1,6 @@
-import java.util.Objects;
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class BackgroundMusic {
   private static BackgroundMusic instance;

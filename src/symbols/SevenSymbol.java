@@ -1,6 +1,6 @@
 package symbols;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 public class SevenSymbol implements Symbol{
 

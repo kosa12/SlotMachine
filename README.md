@@ -24,7 +24,7 @@ The Slot Machine Game is a Java-based application that simulates a virtual slot 
 ## System Requirements ⚙️
 
 - Java Runtime Environment (JRE) installed on the system.
-- 
+
 ## Run Locally 🥁
 1. Clone the repository to your local machine.
    ```bash

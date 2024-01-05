@@ -2,7 +2,7 @@
 
 ## Overview 📖
 
-The Slot Machine Game is a Java-based application that simulates a virtual slot machine. It is designed to provide users with an engaging and entertaining experience of playing a slot game. The project incorporates sound effects, customizable options, and an intuitive user interface.
+The Slot Machine Game is a Java-based application that simulates a virtual slot machine. It is designed to provide users with an engaging and entertaining experience of playing a slot game. The project incorporates sound effects,animations, customizable options, and an intuitive user interface.
 
 
 ## Features 📜

@@ -11,7 +11,9 @@ The Slot Machine Game is a Java-based application that simulates a virtual slot 
 - **Options Menu**: Customize the game settings, including background music volume.
 - **User-Friendly Interface**: Intuitive design for an enjoyable gaming experience.
 - **Threads**:
-Custom shuffle animation using Threads. 
+Custom shuffle animation using Threads.
+- **Pixel art**:
+The symbols on the game window are made by me. 
 
 ## How to Play 🧮
 

@@ -93,7 +93,4 @@ public class OptionFrame extends JFrame {
     BackgroundMusic.getInstance().setVolume(normalizedVolume);
   }
 
-  public static void main(String[] args) {
-    SwingUtilities.invokeLater(OptionFrame::new);
-  }
 }

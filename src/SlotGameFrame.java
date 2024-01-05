@@ -120,7 +120,7 @@ public class SlotGameFrame extends JFrame {
 
     nameLabel = new JLabel(name);
     nameLabel.setForeground(new Color(234, 0, 217));
-    nameLabel.setBounds(20, 20, 400, 70);
+    nameLabel.setBounds(20, 20, 800, 70);
     nameLabel.setFont(font2);
     con.add(nameLabel);
 
@@ -179,12 +179,16 @@ public class SlotGameFrame extends JFrame {
   private void handleBet() {
     try {
       double betAmount = Double.parseDouble(betField.getText());
-      if (betAmount >= 0 && betAmount <= currentBalance) {
-
-        symbolPanel.setShuffleCompleteCallback(() -> checkForWin(betAmount));
-        symbolPanel.startShuffle();
-      } else {
-        JOptionPane.showMessageDialog(this, "Invalid bet amount. Please enter a valid amount within your balance.");
+      if(currentBalance == 0){
+        JOptionPane.showMessageDialog(this, "Your balance is zero.");
+      }
+      else{
+        if (betAmount > 0 && betAmount <= currentBalance) {
+          symbolPanel.setShuffleCompleteCallback(() -> checkForWin(betAmount));
+          symbolPanel.startShuffle();
+        } else {
+          JOptionPane.showMessageDialog(this, "Invalid bet amount. Please enter a valid amount within your balance.");
+        }
       }
     } catch (NumberFormatException ex) {
       JOptionPane.showMessageDialog(this, "Invalid bet amount. Please enter a valid number.");
@@ -260,9 +264,6 @@ public class SlotGameFrame extends JFrame {
     wonLabel.setText("Won: $" + wonAmount);
   }
 
-  public static void main(String[] args) {
-    SwingUtilities.invokeLater(() -> new SlotGameFrame(1000.0, "Matyas"));
-  }
   @Override
   public void dispose() {
     super.dispose();

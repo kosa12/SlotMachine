@@ -191,8 +191,4 @@ public class LoadFrame extends JFrame {
     return saveData;
   }
 
-  public static void main(String[] args) {
-    new LoadFrame();
-  }
-
 }

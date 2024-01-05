@@ -177,9 +177,4 @@ public class StartFrame extends JFrame {
     }
   }
 
-
-  public static void main(String[] args) {
-    new StartFrame();
-  }
-
 }

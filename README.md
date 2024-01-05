@@ -36,6 +36,23 @@ The Slot Machine Game is a Java-based application that simulates a virtual slot 
     ```bash
     javac Main.java
     java Main\
+   
+## Screenshots
+**Menu window**
+![Menu](scrennshots/Menu.png)
+
+**Option window**
+![Option](scrennshots/Option.png)
+
+**Load window**
+![Load](scrennshots/Load.png)
+
+**Save window**
+![Start](scrennshots/Save.png)
+
+**Game window**
+![Game](scrennshots/Game.png)
+   
 ## Badges
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 

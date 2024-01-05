@@ -4,7 +4,6 @@
 
 The Slot Machine Game is a Java-based application that simulates a virtual slot machine. It is designed to provide users with an engaging and entertaining experience of playing a slot game. The project incorporates sound effects, animations, customizable options, and an intuitive user interface.
 
-
 ## Features 📜
 
 - **Slot Machine Simulation**: Experience the thrill of a slot machine with graphical representation.
@@ -21,12 +20,10 @@ The symbols on the game window are made by me.
 2. Adjust game options through the "Options" menu.
 3. Start the game, write you name and add your balance, and enjoy the slot machine simulation.
 
-
 ## System Requirements ⚙️
 
 - Java Runtime Environment (JRE) installed on the system.
-
-
+- 
 ## Run Locally 🥁
 1. Clone the repository to your local machine.
    ```bash

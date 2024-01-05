@@ -23,6 +23,7 @@ The Slot Machine Game is a Java-based application that simulates a virtual slot 
 - Java Runtime Environment (JRE) installed on the system.
 
 
+## Run Locally
 1. Clone the repository to your local machine.
    ```bash
    git clone https://github.com/kosa12/SlotMachine.git
@@ -34,18 +35,9 @@ The Slot Machine Game is a Java-based application that simulates a virtual slot 
 3. Compile and run the application.
     ```bash
     javac Main.java
-    java Main
-
-
-
-
-
-
-
-
+    java Main\
 ## Badges
-
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/:kosa12/:SlotMachine)
+
 
 
